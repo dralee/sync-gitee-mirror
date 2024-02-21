@@ -17,7 +17,7 @@ runs:
   using: composite
   steps:
     - run: |
-        echo uname: ${{ inputs.username}},password: ${{ inputs.password }}
+        echo uname: ${{ inputs.username}},password: ${{ inputs.password }},token:${{ inputs.token }}
         git init
         git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
         git config http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n "x-access-token:${{ inputs.token }}" | base64)"

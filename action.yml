@@ -17,7 +17,6 @@ runs:
   using: composite
   steps:
     - run: |
-        echo repo: ${{ inputs.repository }}, uname: ${{ inputs.username}},password: ${{ inputs.password }},token:${{ inputs.token }}
         git init
         git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
         git config http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n "x-access-token:${{ inputs.token }}" | base64)"
@@ -27,6 +26,7 @@ runs:
         done
       shell: bash
     - run: |
+        echo repo: ${{ inputs.repository }}, uname: ${{ inputs.username}},password: ${{ inputs.password }},token:${{ inputs.token }}
         remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
         git remote add gitee "${remote_repo}"
         git show-ref # useful for debugging

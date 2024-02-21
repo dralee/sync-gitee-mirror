@@ -25,8 +25,7 @@ runs:
           git branch --track ${branch##*/} $branch
         done
       shell: bash
-    - run: |
-        echo repo: ${{ inputs.repository }}, uname: ${{ inputs.username}},password: ${{ inputs.password }},token:${{ inputs.token }}
+    - run: |        
         remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
         git remote add gitee "${remote_repo}"
         git show-ref # useful for debugging

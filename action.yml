@@ -29,16 +29,7 @@ runs:
           git branch --track ${branch##*/} $branch
         done
       shell: bash
-    - run: |        
-        ##remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
-        #git remote add origin https://gitee.com/${{ inputs.repository }}.git
-        #git config http.https://gitee.com/.extraheader "AUTHORIZATION: basic $(echo -n "x-access-token:${{ inputs.giteetoken }}" | base64)"
-        ##git remote add gitee "${remote_repo}"
-        #git show-ref # useful for debugging
-        #git branch --verbose
-        ## publish all
-        #git push --all --force gitee
-        #git push --tags --force gitee
+    - run: |
         git remote add gitee https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git
         git show-ref
         git branch --verbose

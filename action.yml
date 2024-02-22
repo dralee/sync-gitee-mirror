@@ -13,6 +13,10 @@ inputs:
   token:
     description: 'GitHub 令牌，用于私有仓库的拉取。'
     default: ${{ github.token }}
+  giteetoken:
+    description: 'Gitee 令牌，用于私有仓库的拉取。'
+    required: true
+    
 runs:
   using: composite
   steps:
@@ -26,8 +30,10 @@ runs:
         done
       shell: bash
     - run: |        
-        remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
-        git remote add gitee "${remote_repo}"
+        #remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
+        git remote add origin https://gitee.com/${{ inputs.repository }}.git
+        git config http.https://gitee.com/.extraheader "AUTHORIZATION: basic $(echo -n "x-access-token:${{ inputs.giteetoken }}" | base64)"
+        #git remote add gitee "${remote_repo}"
         git show-ref # useful for debugging
         git branch --verbose
         # publish all

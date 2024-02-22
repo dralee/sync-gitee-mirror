@@ -31,7 +31,9 @@ runs:
       shell: bash
     - run: |
         remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
+        ping gitee.com
         git config --global --unset http.proxy
+        ping gitee.com
         git remote add gitee "${remote_repo}"
         git show-ref # useful for debugging
         git branch --verbose

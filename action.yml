@@ -30,8 +30,11 @@ runs:
         done
       shell: bash
     - run: |
-        git remote add gitee https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git
-        git show-ref
+        remote_repo="https://${{ inputs.username }}:${{ inputs.password }}@gitee.com/${{ inputs.repository }}.git"
+        git remote add gitee "${remote_repo}"
+        git show-ref # useful for debugging
         git branch --verbose
-        git push gitee master:master
+        # publish all
+        git push --all --force gitee
+        git push --tags --force gitee
       shell: bash

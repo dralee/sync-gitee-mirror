@@ -21,7 +21,7 @@ runs:
   using: composite
   steps:
     - run: |
-        git init
+        git init -b master
         git remote add origin https://github.com/${GITHUB_REPOSITORY}.git
         git config http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n "x-access-token:${{ inputs.token }}" | base64)"
         git fetch --all
